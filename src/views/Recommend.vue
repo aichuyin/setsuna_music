@@ -78,7 +78,7 @@ export default {
       .then((data) => {
         // console.log(data)
         // this.songs = data.result
-        console.log(data.result)
+        // console.log(data.result)
         const list = []
         data.result.forEach((value) => {
           const obj = {}
