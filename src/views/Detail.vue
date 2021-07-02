@@ -44,7 +44,7 @@ export default {
     } else if (this.$route.params.type === 'album') {
       getAlbum({ id: this.$route.params.id })
         .then((data) => {
-          console.log(data)
+          // console.log(data)
           this.playlist = {
             name: data.album.name,
             coverImgUrl: data.album.picUrl,
@@ -57,7 +57,7 @@ export default {
     } else if (this.$route.params.type === 'singer') {
       getArtistsSongs({ id: this.$route.params.id })
         .then((data) => {
-          console.log(data)
+          // console.log(data)
           this.playlist = {
             name: data.artist.name,
             coverImgUrl: data.artist.picUrl,
@@ -70,7 +70,7 @@ export default {
     } else if (this.$route.params.type === 'rank') {
       getTopList({ id: this.$route.params.id })
         .then((data) => {
-          console.log(data)
+          // console.log(data)
           this.playlist = {
             name: data.playlist.name,
             coverImgUrl: data.playlist.coverImgUrl,

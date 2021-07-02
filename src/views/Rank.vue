@@ -1,5 +1,6 @@
 <template>
   <div class="rank">
+    <div class="rank-wrapper">
       <ScrollView>
         <ul>
           <li v-for="(value, key) in category.titles" :key="key">
@@ -31,6 +32,7 @@
           </li>
         </ul>
       </ScrollView>
+    </div>
       <transition>
         <router-view></router-view>
       </transition>
@@ -74,20 +76,23 @@ export default {
 @import '../assets/css/mixin.scss';
 
 .rank {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 184px;
-  bottom: 0;
-  overflow: hidden;
-  @include bg_sub_color();
-  .group-title {
+  width: 100%;
+  height: 100%;
+  .rank-wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 184px;
+    bottom: 0;
+    overflow: hidden;
+    @include bg_sub_color();
+    .group-title {
     padding: 10px 20px;
     @include font_color();
     @include font_size($font_large);
     font-weight: bold;
-  }
-  .normal-group {
+    }
+    .normal-group {
     li {
       display: flex;
       align-items: center;
@@ -117,8 +122,8 @@ export default {
         }
       }
     }
-  }
-  .other-group {
+    }
+    .other-group {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -148,6 +153,7 @@ export default {
           @include font_size($font_medium_s);
         }
       }
+    }
     }
   }
 }

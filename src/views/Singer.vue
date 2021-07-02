@@ -1,5 +1,6 @@
 <template>
   <div class="singer">
+    <div class="singer-wrapper">
       <ScrollView ref="scrollView">
         <ul class="list-wrapper">
           <li class="list-group" v-for="(value, index) in list" :key="index" ref="listGroup">
@@ -28,6 +29,7 @@
         :class="{'active': currentIndex === index}">{{key}}</li>
       </ul>
       <div class="fix-title" v-show="fixTitle !== ''" ref="fixTitle">{{fixTitle}}</div>
+    </div>
       <transition>
         <router-view></router-view>
       </transition>
@@ -45,7 +47,7 @@ export default {
   created () {
     getAllArtists()
       .then((result) => {
-        console.log(result)
+        // console.log(result)
         this.keys = result.keys
         this.list = result.list
       })
@@ -113,7 +115,7 @@ export default {
       this.$refs.scrollView.scrollTo(0, -offsetY)
     },
     touchstart (ev) {
-      console.log(ev.target.dataset.index)
+      // console.log(ev.target.dataset.index)
       const index = parseInt(ev.target.dataset.index)
       this._keyDown(index)
 
@@ -155,7 +157,7 @@ export default {
         this.$refs.listGroup.forEach((group) => {
           this.groupsTop.push(group.offsetTop)
         })
-        console.log(this.groupsTop)
+        // console.log(this.groupsTop)
       })
     },
     fixTitle () {
@@ -173,14 +175,17 @@ export default {
 @import '../assets/css/mixin.scss';
 
 .singer {
-  position: fixed;
-  top: 184px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  @include bg_sub_color();
-  overflow: hidden;
-  .list-wrapper {
+  width: 100%;
+  height: 100%;
+  .singer-wrapper {
+    position: fixed;
+    top: 184px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include bg_sub_color();
+    overflow: hidden;
+    .list-wrapper {
     // width: 100%;
     // height: 100%;
     .list-group {
@@ -211,8 +216,8 @@ export default {
         }
       }
     }
-  }
-  .list-keys {
+    }
+    .list-keys {
     position: fixed;
     right: 10px;
     top: 60%;
@@ -225,8 +230,8 @@ export default {
         text-shadow: 0 0 10px #000;
       }
     }
-  }
-  .fix-title {
+    }
+    .fix-title {
     position: absolute;
     left: 0;
     right: 0;
@@ -236,6 +241,7 @@ export default {
     @include font_size($font_medium);
     color: #fff;
     @include bg_color();
+    }
   }
 }
 .v-enter {

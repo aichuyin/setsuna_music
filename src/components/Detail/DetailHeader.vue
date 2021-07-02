@@ -1,28 +1,20 @@
 <template>
-  <div class="header" @click="changeTheme">
-      <div class="header-left" @click.stop="back"></div>
-      <p class="header-title">{{title}}</p>
-      <div class="header-right"></div>
-  </div>
+  <Header class="header">
+      <div slot="left" class="header-left" @click.stop="back"></div>
+      <p slot="center" class="header-title">{{title}}</p>
+      <div slot="right" class="header-right"></div>
+  </Header>
 </template>
 
 <script>
+import Header from '../Header.vue'
+
 export default {
   name: 'SubHeader',
-  data () {
-    return {
-      themes: ['theme', 'theme2', 'theme3'],
-      index: 0
-    }
+  components: {
+    Header
   },
   methods: {
-    changeTheme () {
-      this.index++
-      if (this.index >= this.themes.length) {
-        this.index = 0
-      }
-      document.documentElement.setAttribute('data-theme', this.themes[this.index])
-    },
     back () {
       window.history.back()
     }
@@ -42,20 +34,6 @@ export default {
 @import '../../assets/css/mixin.scss';
 
 .header {
-    width: 100%;
-    height: 100px;
-    // background: green;
-    @include bg_color();
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    // z-index: 955;
-    .header-left, .header-right {
-        width: 84px;
-        height: 84px;
-        // background: #000;
-        margin-top: 8px;
-    }
     .header-left {
       @include bg_img('../../assets/images/back');
     }

@@ -140,7 +140,7 @@ export const getTopListDetail = () => {
             }
           }
         })
-        console.log(category)
+        // console.log(category)
         resolve(category)
       })
       .catch(function (err) {
