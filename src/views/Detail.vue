@@ -15,7 +15,7 @@ import SubHeader from '../components/Detail/DetailHeader.vue'
 import DetailTop from '../components/Detail/DetailTop.vue'
 import DetailBottom from '../components/Detail/DetailBottom.vue'
 import ScrollView from '../components/ScrollView.vue'
-import { getPlayList, getAlbum, getArtistsSongs } from '../api/index'
+import { getPlayList, getAlbum, getArtistsSongs, getTopList } from '../api/index'
 
 export default {
   name: 'Detail',
@@ -62,6 +62,19 @@ export default {
             name: data.artist.name,
             coverImgUrl: data.artist.picUrl,
             tracks: data.hotSongs
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else if (this.$route.params.type === 'rank') {
+      getTopList({ id: this.$route.params.id })
+        .then((data) => {
+          console.log(data)
+          this.playlist = {
+            name: data.playlist.name,
+            coverImgUrl: data.playlist.coverImgUrl,
+            tracks: data.playlist.tracks
           }
         })
         .catch((err) => {

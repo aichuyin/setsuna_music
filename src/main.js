@@ -5,6 +5,11 @@ import store from './store'
 import fastclick from 'fastclick'
 import './assets/css/base.scss'
 import VueLazyload from 'vue-lazyload'
+import Loading from './plugin/loading/index'
+
+Vue.use(Loading, {
+  title: '正在加载...'
+})
 
 Vue.use(VueLazyload, {
   // 通过配置loading来设置目标图片未加载完成时的占位图片
