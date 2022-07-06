@@ -4,28 +4,36 @@
       <ScrollView>
         <ul>
           <li v-for="(value, key) in category.titles" :key="key">
-            <h3 class="group-title">{{value}}</h3>
+            <h3 class="group-title">{{ value }}</h3>
             <ul class="normal-group" v-if="value === '官方榜'">
-              <li v-for="obj in category[key]" :key="obj.rank.id" @click.stop="selectItem(obj.rank.id)">
+              <li
+                v-for="obj in category[key]"
+                :key="obj.rank.id"
+                @click.stop="selectItem(obj.rank.id)"
+              >
                 <div class="rank-left">
-                  <img v-lazy="obj.rank.coverImgUrl" alt="">
-                  <p>{{obj.rank.updateFrequency}}</p>
+                  <img v-lazy="obj.rank.coverImgUrl" alt="" />
+                  <p>{{ obj.rank.updateFrequency }}</p>
                 </div>
                 <div class="rank-right">
-                  <p v-for="(song, index) in obj.rank.tracks" :key="song.first">
-                    {{index}}.{{song.first}}-{{song.second}}
+                  <p v-for="(song, index) in obj.rank.tracks" :key="song.first + song.second">
+                    {{ index + 1}}.{{ song.first }}-{{ song.second }}
                   </p>
                 </div>
               </li>
             </ul>
             <ul class="other-group" v-else>
-              <li v-for="obj in category[key]" :key="obj.rank.id" @click.stop="selectItem(obj.rank.id)">
+              <li
+                v-for="obj in category[key]"
+                :key="obj.rank.id"
+                @click.stop="selectItem(obj.rank.id)"
+              >
                 <div class="rank-top">
-                  <img v-lazy="obj.rank.coverImgUrl" alt="">
-                  <p>{{obj.rank.updateFrequency}}</p>
+                  <img v-lazy="obj.rank.coverImgUrl" alt="" />
+                  <p>{{ obj.rank.updateFrequency }}</p>
                 </div>
                 <div class="rank-bottom">
-                  <p>{{obj.rank.name}}</p>
+                  <p>{{ obj.rank.name }}</p>
                 </div>
               </li>
             </ul>
@@ -33,9 +41,9 @@
         </ul>
       </ScrollView>
     </div>
-      <transition>
-        <router-view></router-view>
-      </transition>
+    <transition>
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -60,7 +68,7 @@ export default {
   },
   created () {
     getTopListDetail()
-      .then((data) => {
+      .then(data => {
         // console.log(data)
         this.category = data
       })
@@ -69,11 +77,10 @@ export default {
       })
   }
 }
-
 </script>
-<style scoped lang='scss'>
-@import '../assets/css/variable.scss';
-@import '../assets/css/mixin.scss';
+<style scoped lang="scss">
+@import "../assets/css/variable.scss";
+@import "../assets/css/mixin.scss";
 
 .rank {
   width: 100%;
@@ -87,73 +94,73 @@ export default {
     overflow: hidden;
     @include bg_sub_color();
     .group-title {
-    padding: 10px 20px;
-    @include font_color();
-    @include font_size($font_large);
-    font-weight: bold;
+      padding: 10px 20px;
+      @include font_color();
+      @include font_size($font_large);
+      font-weight: bold;
     }
     .normal-group {
-    li {
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      box-sizing: border-box;
-      .rank-left {
-        position: relative;
-        img {
-          width: 200px;
-          height: 200px;
-          border-radius: 10px;
+      li {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        .rank-left {
+          position: relative;
+          img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+          }
+          p {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            color: #fff;
+            @include font_size($font_medium_s);
+          }
         }
-        p {
-          position: absolute;
-          left: 10px;
-          bottom: 10px;
-          color: #fff;
-          @include font_size($font_medium_s);
+        .rank-right {
+          margin-left: 20px;
+          p {
+            @include font_color();
+            @include font_size($font_medium_s);
+            padding: 10px 0;
+          }
         }
       }
-      .rank-right {
-        margin-left: 20px;
-        p {
-          @include font_color();
-          @include font_size($font_medium_s);
-          padding: 10px 0;
-        }
-      }
-    }
     }
     .other-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    li {
-      padding: 10px 20px;
-      box-sizing: border-box;
-      .rank-top {
-        position: relative;
-        img {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      li {
+        padding: 10px 20px;
+        box-sizing: border-box;
+        .rank-top {
+          position: relative;
+          img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+          }
+          p {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            color: #fff;
+            @include font_size($font_medium_s);
+          }
+        }
+        .rank-bottom {
           width: 200px;
-          height: 200px;
-          border-radius: 10px;
-        }
-        p {
-          position: absolute;
-          left: 10px;
-          bottom: 10px;
-          color: #fff;
-          @include font_size($font_medium_s);
+          p {
+            padding: 10px 0;
+            @include font_color();
+            @include font_size($font_medium_s);
+          }
         }
       }
-      .rank-bottom {
-        width: 200px;
-        p {
-          padding: 10px 0;
-          @include font_color();
-          @include font_size($font_medium_s);
-        }
-      }
-    }
     }
   }
 }

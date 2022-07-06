@@ -62,16 +62,21 @@ export default {
     ]),
     search () {
       // console.log('发送请求')
+      this.songs = []
+      if (this.keywords.trim() === '') {
+        return
+      }
       getSearchList({ keywords: this.keywords })
         .then((data) => {
-          // console.log(data)
-          this.songs = data.result.songs
+          console.log(data)
+          this.songs = data.result?.songs
         })
         .catch(function (err) {
           console.log(err)
         })
     },
     selectMusic (id) {
+      // console.log(111)
       this.setFullScreen(true)
       this.setSongDetail([id])
 

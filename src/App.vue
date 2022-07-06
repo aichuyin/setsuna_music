@@ -12,7 +12,8 @@
 import MainHeader from './components/MainHeader.vue'
 import Tabbar from './components/Tabbar.vue'
 // 这个Player不知道为什么不能加.vue后缀，vetur会报错
-import Player from './views/Player'
+// 2022年1月8日又不知道为什么不报错了
+import Player from './views/Player.vue'
 
 export default {
   name: 'App',
